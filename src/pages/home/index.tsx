@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Product } from "../../types/product";
 import { getProducts } from "../../services/homeService";
 
-const HomeContainer = () => {
+const Home = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -53,4 +53,4 @@ const HomeContainer = () => {
   );
 };
 
-export default HomeContainer;
+export default Home;

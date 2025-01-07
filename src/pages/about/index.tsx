@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import { fetchCarts } from "../../store/slices/exampleSlice";
 
-const AboutContainer = () => {
+const About = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { carts } = useSelector((state: RootState) => state.example);
 
@@ -11,7 +11,6 @@ const AboutContainer = () => {
     dispatch(fetchCarts());
   }, [dispatch]);
 
-  console.log(carts);
 
   return (
     <div className="py-10">
@@ -35,4 +34,4 @@ const AboutContainer = () => {
   );
 };
 
-export default AboutContainer;
+export default About;
