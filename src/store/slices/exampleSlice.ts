@@ -8,8 +8,11 @@ export const fetchCarts = createAsyncThunk<CartsResponse>(
     try {
       const response = await getCarts();
       return response;
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+      return thunkAPI.rejectWithValue("An unknown error occurred");
     }
   }
 );

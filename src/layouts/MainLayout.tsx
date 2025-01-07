@@ -1,6 +1,10 @@
+import { ReactNode } from 'react';
 import Navbar from '../components/Navbar';
+interface MainLayoutProps {
+    children: ReactNode; 
+}
 
-const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const MainLayout = ({ children }: MainLayoutProps) => {
     return (
         <div className="flex flex-col min-h-screen bg-gray-100">
             {/* Navbar */}
