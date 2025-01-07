@@ -1,5 +1,7 @@
-const About = () => {
-    return <div>Welcome to <b className="text-lg font-bold">About Page</b></div>;
+import AboutContainer from "../containers/about";
+
+const AboutPage = () => {
+  return <AboutContainer />;
 };
 
-export default About;
+export default AboutPage;

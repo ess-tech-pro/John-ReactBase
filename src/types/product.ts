@@ -2,28 +2,28 @@
 
 // Interface cho Product
 export interface Product {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    imageUrl: string;
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  imageUrl: string;
 }
 
 // Interface cho Cart
 export interface Cart {
-    id: number;
-    products: Product[];
-    total: number;
+  id: number;
+  products: Product[];
+  total: number;
 }
 
 // Interface cho response khi gọi API sản phẩm
 export interface ProductsResponse {
-    products: Product[];
-    total: number;
+  products: Product[];
+  total: number;
 }
 
 // Interface cho response khi gọi API giỏ hàng
 export interface CartsResponse {
-    carts: Cart[];
-    total: number;
+  carts: Cart[];
+  total: number;
 }
