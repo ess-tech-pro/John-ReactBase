@@ -3,10 +3,10 @@
 // Interface cho Product
 export interface Product {
   id: number;
-  name: string;
+  title: string;
   description: string;
   price: number;
-  imageUrl: string;
+  thumbnail: string;
 }
 
 // Interface cho Cart

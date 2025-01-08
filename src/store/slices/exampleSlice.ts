@@ -1,12 +1,29 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { CartsResponse } from "../../types/product";
-import { getCarts } from "../../services/homeService";
+import { createProduct, getProducts } from "../../services/homeService";
+import { CreateProductRequest, CreateProductResponse, ProductResponse } from "../../schemas";
+import { ActionTypes } from "../constants/actionTypes";
+import { NameSlices } from "../constants/nameSlices";
 
-export const fetchCarts = createAsyncThunk<CartsResponse>(
-  "carts/fetchCarts",
+export const fetchProducts = createAsyncThunk<ProductResponse>(
+  ActionTypes.PRODUCTS.FETCH_PRODUCTS,
   async (_, thunkAPI) => {
     try {
-      const response = await getCarts();
+      const response = await getProducts();
+      return response;
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+      return thunkAPI.rejectWithValue("An unknown error occurred");
+    }
+  }
+);
+
+export const postCart = createAsyncThunk<CreateProductResponse, CreateProductRequest>(
+  ActionTypes.PRODUCTS.POST_CART,
+  async (cartData, thunkAPI) => {
+    try {
+      const response = await createProduct(cartData);
       return response;
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -18,10 +35,11 @@ export const fetchCarts = createAsyncThunk<CartsResponse>(
 );
 
 const exampleSlice = createSlice({
-  name: "example",
+  name: NameSlices.EXAMPLE,
   initialState: {
     value: 0,
-    carts: [] as CartsResponse["carts"],
+    products: [] as ProductResponse["products"],
+    
   },
   reducers: {
     increment: (state) => {
@@ -32,8 +50,8 @@ const exampleSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchCarts.fulfilled, (state, action) => {
-      state.carts = action.payload.carts;
+    builder.addCase(fetchProducts.fulfilled, (state, action) => {
+      state.products = action.payload.products;
     });
   },
 });

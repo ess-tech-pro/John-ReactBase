@@ -22,16 +22,6 @@ const Navbar = () => {
                 >
                     Home
                 </NavLink>
-                <NavLink
-                    to="/about"
-                    className={({ isActive }) =>
-                        isActive
-                            ? 'text-blue-300 font-semibold'
-                            : 'text-white hover:text-blue-300'
-                    }
-                >
-                    About
-                </NavLink>
             </div>
         </nav>
     );
