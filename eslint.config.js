@@ -4,11 +4,25 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
-import react from 'eslint-plugin-react';
+import { fixupConfigRules } from "@eslint/compat";
+import { FlatCompat } from "@eslint/eslintrc";
+import { fileURLToPath } from "node:url";
+import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const compat = new FlatCompat({
+    baseDirectory: __dirname,
+    recommendedConfig: js.configs.recommended,
+    allConfig: js.configs.all
+});
 
 export default [
+  ...fixupConfigRules(compat.extends(
+    "airbnb",
+  )),
   {
-    ignores: ['dist', 'node_modules', 'build'], // Bỏ qua thư mục "dist"
+    ignores: ['dist', 'node_modules', 'vite.config.ts', 'postcss.config.cjs'], // Bỏ qua thư mục "dist"
   },
   {
     files: ['**/*.{js,jsx,ts,tsx}'], // Áp dụng cho các file JavaScript và TypeScript
@@ -18,7 +32,9 @@ export default [
       parser: tsParser, // Sử dụng parser của TypeScript
     },
     plugins: {
-      'react': react,
+      // ERROR - Config (unnamed): Key "plugins": Cannot redefine plugin "react".
+      // Bởi vì react được định nghĩa ở extend của airbnb
+      // 'react': react,
       'react-hooks': reactHooks, // Plugin React Hooks
       'react-refresh': reactRefresh, // Plugin React Refresh
       '@typescript-eslint': tseslint, // Plugin TypeScript ESLint
@@ -42,6 +58,23 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      'react/react-in-jsx-scope': 'off',
+      'react/button-has-type': 'off',
+      'import/extensions': 'off',
+      'no-param-reassign': 'off',
+      'no-trailing-spaces': 'off',
+      'max-len': 'off',
+      'import/prefer-default-export': 'off',
+    },
+    settings: {
+      'import/resolver': {
+        'eslint-import-resolver-custom-alias': {
+          alias: {
+            '': './src',
+          },
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        },
+      },
     },
   },
 ];
