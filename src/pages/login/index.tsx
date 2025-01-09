@@ -3,7 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { LoginRequestSchema } from "../../schemas";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/store";
-import { login } from "../../store/slices/loginReducer";
+import { login } from "../../store/slices/loginSlice";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
