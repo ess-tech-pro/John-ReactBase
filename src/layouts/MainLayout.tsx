@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import Navbar from '../components/Navbar';
 
 interface MainLayoutProps {
-    children: ReactNode;
+  children: ReactNode;
 }
 
 function MainLayout({ children }: MainLayoutProps) {
@@ -16,18 +16,12 @@ function MainLayout({ children }: MainLayoutProps) {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 container mx-auto px-4 py-6">
-        {children}
-      </main>
+      <main className="flex-1 container mx-auto px-4 py-6">{children}</main>
 
       {/* Footer */}
       <footer className="bg-blue-600 text-white">
         <div className="container mx-auto px-4 py-4 text-center">
-          ©
-          {' '}
-          {new Date().getFullYear()}
-          {' '}
-          My React App. All rights reserved.
+          © {new Date().getFullYear()} My React App. All rights reserved.
         </div>
       </footer>
     </div>

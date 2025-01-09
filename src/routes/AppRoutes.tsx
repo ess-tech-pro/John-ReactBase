@@ -1,9 +1,9 @@
-import { Routes, Route } from "react-router-dom";
-import NotFound from "../pages/not-found";
-import Home from "../pages/home";
-import Login from "../pages/login";
-import MainLayout from "../layouts/MainLayout";
-import AuthLayout from "../layouts/AuthLayout";
+import { Routes, Route } from 'react-router-dom';
+import NotFound from '../pages/not-found';
+import Home from '../pages/home';
+import Login from '../pages/login';
+import MainLayout from '../layouts/MainLayout';
+import AuthLayout from '../layouts/AuthLayout';
 
 function AppRoutes() {
   return (

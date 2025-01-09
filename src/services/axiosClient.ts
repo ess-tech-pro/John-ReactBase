@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
 // import * as yup from "yup";
 // import { ProductRequestSchema, ProductResponseSchema } from "../schemas";
 
 const axiosClient = axios.create({
   //   baseURL: process.env.REACT_APP_API_BASE_URL || "https://api.example.com",
-  baseURL: "https://dummyjson.com",
+  baseURL: 'https://dummyjson.com',
 
   timeout: 10000, // Thời gian timeout
 });
@@ -13,7 +13,7 @@ const axiosClient = axios.create({
 axiosClient.interceptors.request.use(
   async (config) => {
     // Thêm token vào header
-    const token = localStorage.getItem("accessToken");
+    const token = localStorage.getItem('accessToken');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -31,7 +31,7 @@ axiosClient.interceptors.request.use(
 
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => Promise.reject(error),
 );
 
 // Response Interceptor: Validate data trả về hoặc xử lý lỗi chung
@@ -51,23 +51,23 @@ axiosClient.interceptors.response.use(
     if (error.response) {
       // Xử lý lỗi HTTP cụ thể
       if (error.response.status === 401) {
-        console.error("Unauthorized! Redirecting to login...");
+        console.error('Unauthorized! Redirecting to login...');
         // Ví dụ: Redirect đến trang login
-        window.location.href = "/login";
+        window.location.href = '/login';
       } else if (error.response.status === 403) {
         console.error(
-          "Forbidden! You don't have permission to access this resource."
+          "Forbidden! You don't have permission to access this resource.",
         );
       }
     } else if (error.request) {
       // Lỗi khi không nhận được phản hồi từ server
-      console.error("No response from server!");
+      console.error('No response from server!');
     } else {
       // Các lỗi khác
-      console.error("Axios error:", error.message);
+      console.error('Axios error:', error.message);
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 export default axiosClient;
