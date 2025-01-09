@@ -1,9 +1,9 @@
-import { useEffect } from "react";
-import { AppDispatch, RootState } from "../../store/store";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts, postCart } from "../../store/slices/exampleSlice";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store/store';
+import { fetchProducts, postCart } from '../../store/slices/exampleSlice';
 
-const Home = () => {
+function Home() {
   const dispatch = useDispatch<AppDispatch>();
   const { products } = useSelector((state: RootState) => state.example);
   useEffect(() => {
@@ -11,8 +11,8 @@ const Home = () => {
   }, [dispatch]);
 
   const onAddMoreProduct = () => {
-    dispatch(postCart({title: 'this is test'}))
-  }
+    dispatch(postCart({ title: 'this is test' }));
+  };
 
   return (
     <div className="py-10">
@@ -24,7 +24,6 @@ const Home = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 px-4">
-
 
         {products.map((product) => (
           <div
@@ -42,7 +41,8 @@ const Home = () => {
               </h3>
               <p className="text-gray-600 mt-2">{product.description}</p>
               <p className="text-lg font-semibold text-blue-600 mt-4">
-                ${product.price}
+                $
+                {product.price}
               </p>
               <button className="mt-4 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors duration-300">
                 Add to Cart
@@ -53,6 +53,6 @@ const Home = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Home;
