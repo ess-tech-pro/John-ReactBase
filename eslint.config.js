@@ -4,25 +4,29 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
-import { fixupConfigRules } from "@eslint/compat";
-import { FlatCompat } from "@eslint/eslintrc";
-import { fileURLToPath } from "node:url";
+import { fixupConfigRules } from '@eslint/compat';
+import { FlatCompat } from '@eslint/eslintrc';
+import { fileURLToPath } from 'node:url';
 import path from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
-    baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended,
-    allConfig: js.configs.all
+  baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
+  allConfig: js.configs.all,
 });
 
 export default [
-  ...fixupConfigRules(compat.extends(
-    "airbnb",
-  )),
+  ...fixupConfigRules(compat.extends('airbnb')),
   {
-    ignores: ['dist', 'node_modules', 'vite.config.ts', 'postcss.config.cjs'], // Bỏ qua thư mục "dist"
+    ignores: [
+      'dist',
+      'node_modules',
+      'vite.config.ts',
+      'postcss.config.cjs',
+      'eslint.config.js',
+    ], // Bỏ qua thư mục "dist"
   },
   {
     files: ['**/*.{js,jsx,ts,tsx}'], // Áp dụng cho các file JavaScript và TypeScript
@@ -49,15 +53,30 @@ export default [
       // Không sử dụng var
       'no-var': 'error',
       // Quy tắc PascalCase cho component
-      'react/jsx-pascal-case': ['error', {
-        'allowAllCaps': false, // Ngăn cấm tất cả các component viết hoa toàn bộ
-        'ignore': [] // Đảm bảo không bỏ qua bất kỳ tên component nào
-      }],
-      'react/jsx-filename-extension': ['error', { extensions: ['.tsx', '.jsx'] }],
+      'react/jsx-pascal-case': [
+        'error',
+        {
+          allowAllCaps: false, // Ngăn cấm tất cả các component viết hoa toàn bộ
+          ignore: [], // Đảm bảo không bỏ qua bất kỳ tên component nào
+        },
+      ],
+      'react/jsx-filename-extension': [
+        'error',
+        { extensions: ['.tsx', '.jsx'] },
+      ],
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
       ],
+      'jsx-a11y/label-has-associated-control': [
+        'error',
+        {
+          controlComponents: ['Input'],
+          depth: 3,
+          assert: 'htmlFor',
+        },
+      ],
+      'react/jsx-props-no-spreading': 'off',
       'react/react-in-jsx-scope': 'off',
       'react/button-has-type': 'off',
       'import/extensions': 'off',
@@ -65,6 +84,8 @@ export default [
       'no-trailing-spaces': 'off',
       'max-len': 'off',
       'import/prefer-default-export': 'off',
+      'react/jsx-one-expression-per-line': 'off',
+      'react/jsx-wrap-multilines': 'off',
     },
     settings: {
       'import/resolver': {

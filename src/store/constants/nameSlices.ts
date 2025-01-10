@@ -1,4 +1,4 @@
 export const NameSlices = {
-  EXAMPLE: "example",
-  LOGIN: "login",
+  EXAMPLE: 'example',
+  LOGIN: 'login',
 };

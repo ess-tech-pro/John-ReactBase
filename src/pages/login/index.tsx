@@ -1,12 +1,12 @@
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { LoginRequestSchema } from "../../schemas";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../store/store";
-import { login } from "../../store/slices/loginSlice";
-import { useNavigate } from "react-router-dom";
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { login } from '../../store/slices/loginSlice';
+import { AppDispatch } from '../../store/store';
+import { LoginRequest, LoginRequestSchema } from '../../schemas';
 
-const Login = () => {
+function Login() {
   const {
     register,
     handleSubmit,
@@ -17,26 +17,23 @@ const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: LoginRequest) => {
     dispatch(
       login({
         email: data.email,
         password: data.password,
-      })
+      }),
     ).then(() => {
-      navigate("/");
+      navigate('/');
     });
   };
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900 w-full">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <a
-          href="#"
-          className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
-        >
+        <p className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
           Logo
-        </a>
+        </p>
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -54,9 +51,9 @@ const Login = () => {
                   Your email
                 </label>
                 <input
-                  type="email"
-                  {...register("email")}
                   id="email"
+                  type="email"
+                  {...register('email')}
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@company.com"
                 />
@@ -73,7 +70,7 @@ const Login = () => {
                 </label>
                 <input
                   type="password"
-                  {...register("password")}
+                  {...register('password')}
                   id="password"
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -103,12 +100,15 @@ const Login = () => {
                     </label>
                   </div>
                 </div>
-                <a
-                  href="#"
+                <button
+                  type="button"
                   className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  onClick={() => {
+                    // Add your forgot password logic here
+                  }}
                 >
                   Forgot password?
-                </a>
+                </button>
               </div>
               <button
                 type="submit"
@@ -117,13 +117,16 @@ const Login = () => {
                 Sign in
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Don’t have an account yet?{" "}
-                <a
-                  href="#"
+                Don’t have an account yet?
+                <button
+                  type="button"
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  onClick={() => {
+                    // Add your sign-up logic here
+                  }}
                 >
                   Sign up
-                </a>
+                </button>
               </p>
             </form>
           </div>
@@ -131,6 +134,6 @@ const Login = () => {
       </div>
     </section>
   );
-};
+}
 
 export default Login;
