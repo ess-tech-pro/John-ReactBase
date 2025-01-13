@@ -1,15 +1,15 @@
 // I need create a new function called login to handle login request. This function will have the following signature:
 
-import { LoginRequest, LoginResponse } from '../schemas';
-import axiosClient from './axiosClient';
+import { LoginRequest, LoginResponse } from "../schemas";
+import axiosClient from "./axiosClient";
 
 // Function name: login
 const login = async (loginData: LoginRequest): Promise<LoginResponse> => {
   if (loginData) {
     // call the login api
-    const response = (await axiosClient.post('/auth/login', {
-      username: 'emilys',
-      password: 'emilyspass',
+    const response = (await axiosClient.post("/auth/login", {
+      username: "emilys",
+      password: "emilyspass",
     })) as {
       accessToken: string;
       id: number;
@@ -29,12 +29,12 @@ const login = async (loginData: LoginRequest): Promise<LoginResponse> => {
     };
   }
   return {
-    accessToken: '',
+    accessToken: "",
     user: {
       id: 0,
-      username: '',
-      email: '',
-      role: '',
+      username: "",
+      email: "",
+      role: "",
     },
   };
 };

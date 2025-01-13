@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -14,9 +14,11 @@ function Navbar() {
       <div className="space-x-4">
         <NavLink
           to="/"
-          className={({ isActive }) => (isActive
-            ? 'text-blue-300 font-semibold'
-            : 'text-white hover:text-blue-300')}
+          className={({ isActive }) =>
+            isActive
+              ? "text-blue-300 font-semibold"
+              : "text-white hover:text-blue-300"
+          }
         >
           Home
         </NavLink>
