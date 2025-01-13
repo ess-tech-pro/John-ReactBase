@@ -91,6 +91,7 @@ export default [
 			'import/prefer-default-export': 'off',
 			'react/jsx-one-expression-per-line': 'off',
 			'react/jsx-wrap-multilines': 'off',
+			'implicit-arrow-linebreak': 'off',
 			quotes: 'off',
 		},
 		settings: {
