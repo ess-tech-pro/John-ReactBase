@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../store/slices/loginSlice';
-import { AppDispatch } from '../../store/store';
+import { AppDispatch, RootState } from '../../store/store';
 import { LoginRequest, LoginRequestSchema } from '../../schemas';
 
 function Login() {
@@ -16,6 +16,7 @@ function Login() {
   });
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+  const error = useSelector((state: RootState) => state.login.error); // Lấy lỗi từ Redux state
 
   const onSubmit = async (data: LoginRequest) => {
     dispatch(
@@ -23,9 +24,14 @@ function Login() {
         email: data.email,
         password: data.password,
       }),
-    ).then(() => {
-      navigate('/');
-    });
+    )
+      .unwrap() // unwrap giúp bắt lỗi reject
+      .then(() => {
+        navigate('/');
+      })
+      .catch((err) => {
+        console.error('Login failed:', err); // Có thể log lỗi nếu cần
+      });
   };
 
   return (
@@ -39,6 +45,7 @@ function Login() {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Sign in to your account
             </h1>
+            {/* Hiển thị lỗi */}
             <form
               className="space-y-4 md:space-y-6"
               onSubmit={handleSubmit(onSubmit)}
@@ -110,6 +117,7 @@ function Login() {
                   Forgot password?
                 </button>
               </div>
+              {error && <p style={{ color: 'red' }}>{error}</p>}
               <button
                 type="submit"
                 className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"

@@ -24,6 +24,7 @@ export const LoginResponseSchema = yup.object().shape({
     image: yup.string(),
     refreshToken: yup.string(),
   }),
+  error: yup.string(),
 });
 
 export type LoginRequest = yup.InferType<typeof LoginRequestSchema>;

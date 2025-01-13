@@ -35,29 +35,16 @@ const loginReducer = createSlice({
       image: '',
       refreshToken: '',
     },
+    error: '',
   } as LoginResponse,
-  reducers: {
-    // setToken: (state, action: PayloadAction<string>) => {
-    //   state.accessToken = action.payload;
-    // },
-    // setUser: (
-    //   state,
-    //   action: PayloadAction<Omit<LoginResponse, 'accessToken'>>,
-    // ) => {
-    //   state.user = {
-    //     id: action.payload.id,
-    //     username: action.payload.username,
-    //     email: action.payload.email,
-    //   };
-    // },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
       state.accessToken = action.payload.accessToken;
       state.user = action.payload.user;
+      state.error = '';
     });
   },
 });
 
-// export const { setToken, setUser } = loginReducer.actions;
 export default loginReducer.reducer;
