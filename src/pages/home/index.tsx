@@ -19,10 +19,8 @@ function Home() {
     dispatch(postCart({ title: 'this is test' }));
   };
 
-  console.log('logged', logged);
   return (
     <div className="py-10">
-      {/* User information */}
       <div className="border-t border-gray-100">
         <dl className="divide-y divide-gray-100">
           <div className="p-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
@@ -53,7 +51,6 @@ function Home() {
                   {user.gender}
                 </dd>
               </div>
-              {/* Add more fields as needed */}
             </>
           )}
         </dl>
