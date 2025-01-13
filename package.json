@@ -64,7 +64,7 @@
     "vite": "^6.0.5"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "npm run lint"
+    "*.{js,jsx,ts,tsx}": "npm run prettier:fix && npm run lint"
   },
   "commitlint": {
     "extends": [
