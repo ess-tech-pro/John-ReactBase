@@ -6,10 +6,9 @@ import { fetchProducts, postCart } from '../../store/slices/exampleSlice';
 function Home() {
   const dispatch = useDispatch<AppDispatch>();
   const { products } = useSelector((state: RootState) => state.example);
-  const logged = useSelector((state: RootState) => state.login);
+  const { user, accessToken } = useSelector((state: RootState) => state.login);
 
-  const isLogged = logged.accessToken !== '';
-  const user = logged?.user || {};
+  const isLogged = !!accessToken;
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -29,7 +28,7 @@ function Home() {
               {isLogged ? 'Yes' : 'No'}
             </dd>
           </div>
-          {logged.user && (
+          {isLogged && (
             <>
               <div className="p-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
                 <dt className="text-sm/6 font-medium text-gray-900">

@@ -66,6 +66,8 @@ axiosClient.interceptors.response.use(
       // Các lỗi khác
       console.error('Axios error:', error.message);
     }
+
+    // throw error;
     return Promise.reject(error);
   },
 );
