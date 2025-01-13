@@ -1,4 +1,4 @@
-export default {
+module.exports = {
 	bracketSameLine: false,
 	semi: false,
 	singleQuote: true,
