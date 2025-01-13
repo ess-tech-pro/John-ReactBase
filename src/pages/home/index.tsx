@@ -6,6 +6,11 @@ import { fetchProducts, postCart } from '../../store/slices/exampleSlice';
 function Home() {
   const dispatch = useDispatch<AppDispatch>();
   const { products } = useSelector((state: RootState) => state.example);
+  const logged = useSelector((state: RootState) => state.login);
+
+  const isLogged = logged.accessToken !== '';
+  const user = logged?.user || {};
+
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
@@ -14,9 +19,47 @@ function Home() {
     dispatch(postCart({ title: 'this is test' }));
   };
 
+  console.log('logged', logged);
   return (
     <div className="py-10">
-      <h1 className="text-3xl font-semibold text-center mb-8">Product List</h1>
+      {/* User information */}
+      <div className="border-t border-gray-100">
+        <dl className="divide-y divide-gray-100">
+          <div className="p-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
+            <dt className="text-sm/6 font-medium text-gray-900">Logged in:</dt>
+            <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-3 sm:mt-0">
+              {isLogged ? 'Yes' : 'No'}
+            </dd>
+          </div>
+          {logged.user && (
+            <>
+              <div className="p-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
+                <dt className="text-sm/6 font-medium text-gray-900">
+                  Username:
+                </dt>
+                <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-3 sm:mt-0">
+                  {user.username}
+                </dd>
+              </div>
+              <div className="p-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
+                <dt className="text-sm/6 font-medium text-gray-900">Email:</dt>
+                <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-3 sm:mt-0">
+                  {user.email}
+                </dd>
+              </div>
+              <div className="p-2 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
+                <dt className="text-sm/6 font-medium text-gray-900">Gender:</dt>
+                <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-3 sm:mt-0">
+                  {user.gender}
+                </dd>
+              </div>
+              {/* Add more fields as needed */}
+            </>
+          )}
+        </dl>
+      </div>
+
+      <h2 className="text-3xl font-semibold text-center my-8">Product List</h2>
       <div className="flex justify-center py-3">
         <button
           onClick={() => onAddMoreProduct()}

@@ -17,7 +17,12 @@ export const LoginResponseSchema = yup.object().shape({
     id: yup.number().required('ID is required'),
     username: yup.string().required('Username is required'),
     email: yup.string().required('Email is required'),
-    role: yup.string().required('Role is required'),
+    role: yup.string(),
+    firstName: yup.string(),
+    lastName: yup.string(),
+    gender: yup.string(),
+    image: yup.string(),
+    refreshToken: yup.string(),
   }),
 });
 
