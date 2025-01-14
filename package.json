@@ -16,7 +16,7 @@
     "prettier:fix": "npm run prettier -- --write",
     "format": "npm run prettier:fix && npm run lint:fix",
     "prepare": "git config core.autocrlf false && npx husky install",
-    "pre-commit": "npm run prettier:fix && git add ./src && lint-staged --allow-empty"
+    "pre-commit": "lint-staged --allow-empty"
   },
   "engines": {
     "node": ">=22.x"
